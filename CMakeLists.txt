@@ -20,6 +20,7 @@ add_executable(GainesvilleRoadNavigator
         src/dijkstra.cpp
         src/astar.cpp
         src/distance.cpp
+        src/minHeap.cpp
 )
 
 target_link_libraries(GainesvilleRoadNavigator PRIVATE nlohmann_json::nlohmann_json)
