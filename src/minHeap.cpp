@@ -49,8 +49,6 @@ void MinHeap::push(Node* node, double dist) {
 Node* MinHeap::pop() {
     if (heap.empty()) throw std::runtime_error("Heap is empty!");
 
-    popCount++;
-
     Node* minNode = heap[0].mapNode;
     heap[0] = heap.back();
     heap.pop_back();
@@ -59,5 +57,3 @@ Node* MinHeap::pop() {
 
     return minNode;
 }
-
-int MinHeap::getPopCount() const { return popCount; }

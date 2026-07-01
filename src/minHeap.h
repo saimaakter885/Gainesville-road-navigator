@@ -13,7 +13,6 @@ struct HeapNode {
 
 class MinHeap {
     vector<HeapNode> heap;
-    int popCount = 0;
 
     void heapifyUp(int index);
     void heapifyDown(int index);
