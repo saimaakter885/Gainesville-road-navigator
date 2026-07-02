@@ -5,34 +5,9 @@
 #include "dijkstra.h"
 #include <unordered_set>
 #include <chrono>
+#include "minHeap.h"
 
 using std::unordered_set;
-
-void Dijkstra::reset() {
-    distances.clear();
-    previous.clear();
-    nodesVisited = 0;
-}
-
-// Turns Node path into coordinate pair path for clean output
-vector<pair<double, double>> Dijkstra::generateCoordVec(Node* start, Node* destination) {
-    vector<pair<double, double>> path;
-
-    // Return empty vector if destination not found
-    if (previous.find(destination) == previous.end() && start != destination) return path;
-
-    // Trace backward using previous map
-    Node* curr = destination;
-    while (curr != nullptr) {
-        path.push_back({curr->lat, curr->lon});
-        curr = previous[curr];
-    }
-
-    // Reverse path to produce coordinates from start -> destination
-    std::reverse(path.begin(), path.end());
-
-    return path;
-}
 
 vector<pair<double, double>> Dijkstra::findPath(Node* start, Node* destination) {
     // Initialization
@@ -89,9 +64,3 @@ vector<pair<double, double>> Dijkstra::findPath(Node* start, Node* destination) 
     // Create and return coordinate pair vector
     return generateCoordVec(start, destination);
 }
-
-int Dijkstra::getNodesVisited() const { return nodesVisited; }
-
-double Dijkstra::getTotalDistance() const { return totalDistance; }
-
-long long Dijkstra::getExecutionTime() const { return executionTime; }

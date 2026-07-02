@@ -21,5 +21,4 @@ public:
     bool empty() const;
     void push(Node* node, double dist);
     Node* pop();
-    int getPopCount() const;
 };
