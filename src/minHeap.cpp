@@ -16,7 +16,7 @@ void MinHeap::heapifyUp(int index) {
 }
 
 void MinHeap::heapifyDown(int index) {
-    while (2 * index + 1 < heap.size()) {
+    while (2 * index + 1 < static_cast<int>(heap.size())) {
         int leftChildIndex = 2 * index + 1;
         int rightChildIndex = 2 * index + 2;
         int smallestIndex = index;
@@ -26,7 +26,7 @@ void MinHeap::heapifyDown(int index) {
             smallestIndex = leftChildIndex;
         }
         // Right child smaller than parent or left child
-        if (rightChildIndex < heap.size() && heap[rightChildIndex].distance < heap[smallestIndex].distance) {
+        if (rightChildIndex < static_cast<int>(heap.size()) && heap[rightChildIndex].distance < heap[smallestIndex].distance) {
             smallestIndex = rightChildIndex;
         }
 
@@ -43,7 +43,7 @@ bool MinHeap::empty() const { return heap.empty(); }
 
 void MinHeap::push(Node* node, double dist) {
     heap.push_back({node, dist});
-    heapifyUp(heap.size() - 1);
+    heapifyUp(static_cast<int>(heap.size()) - 1);
 }
 
 Node* MinHeap::pop() {
