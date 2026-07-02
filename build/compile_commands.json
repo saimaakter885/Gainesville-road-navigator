@@ -1,0 +1,50 @@
+[
+{
+  "directory": "/Users/shmoney81/Gainesville-road-navigator/build",
+  "command": "/usr/bin/clang++  -I/Users/shmoney81/Gainesville-road-navigator/src -I/Users/shmoney81/Gainesville-road-navigator/build/_deps/json-src/include  -Wall -Werror -g -arch arm64 -o CMakeFiles/GainesvilleRoadNavigator.dir/src/main.cpp.o -c /Users/shmoney81/Gainesville-road-navigator/src/main.cpp",
+  "file": "/Users/shmoney81/Gainesville-road-navigator/src/main.cpp",
+  "output": "CMakeFiles/GainesvilleRoadNavigator.dir/src/main.cpp.o"
+},
+{
+  "directory": "/Users/shmoney81/Gainesville-road-navigator/build",
+  "command": "/usr/bin/clang++  -I/Users/shmoney81/Gainesville-road-navigator/src -I/Users/shmoney81/Gainesville-road-navigator/build/_deps/json-src/include  -Wall -Werror -g -arch arm64 -o CMakeFiles/GainesvilleRoadNavigator.dir/src/parser.cpp.o -c /Users/shmoney81/Gainesville-road-navigator/src/parser.cpp",
+  "file": "/Users/shmoney81/Gainesville-road-navigator/src/parser.cpp",
+  "output": "CMakeFiles/GainesvilleRoadNavigator.dir/src/parser.cpp.o"
+},
+{
+  "directory": "/Users/shmoney81/Gainesville-road-navigator/build",
+  "command": "/usr/bin/clang++  -I/Users/shmoney81/Gainesville-road-navigator/src -I/Users/shmoney81/Gainesville-road-navigator/build/_deps/json-src/include  -Wall -Werror -g -arch arm64 -o CMakeFiles/GainesvilleRoadNavigator.dir/src/graph.cpp.o -c /Users/shmoney81/Gainesville-road-navigator/src/graph.cpp",
+  "file": "/Users/shmoney81/Gainesville-road-navigator/src/graph.cpp",
+  "output": "CMakeFiles/GainesvilleRoadNavigator.dir/src/graph.cpp.o"
+},
+{
+  "directory": "/Users/shmoney81/Gainesville-road-navigator/build",
+  "command": "/usr/bin/clang++  -I/Users/shmoney81/Gainesville-road-navigator/src -I/Users/shmoney81/Gainesville-road-navigator/build/_deps/json-src/include  -Wall -Werror -g -arch arm64 -o CMakeFiles/GainesvilleRoadNavigator.dir/src/dijkstra.cpp.o -c /Users/shmoney81/Gainesville-road-navigator/src/dijkstra.cpp",
+  "file": "/Users/shmoney81/Gainesville-road-navigator/src/dijkstra.cpp",
+  "output": "CMakeFiles/GainesvilleRoadNavigator.dir/src/dijkstra.cpp.o"
+},
+{
+  "directory": "/Users/shmoney81/Gainesville-road-navigator/build",
+  "command": "/usr/bin/clang++  -I/Users/shmoney81/Gainesville-road-navigator/src -I/Users/shmoney81/Gainesville-road-navigator/build/_deps/json-src/include  -Wall -Werror -g -arch arm64 -o CMakeFiles/GainesvilleRoadNavigator.dir/src/astar.cpp.o -c /Users/shmoney81/Gainesville-road-navigator/src/astar.cpp",
+  "file": "/Users/shmoney81/Gainesville-road-navigator/src/astar.cpp",
+  "output": "CMakeFiles/GainesvilleRoadNavigator.dir/src/astar.cpp.o"
+},
+{
+  "directory": "/Users/shmoney81/Gainesville-road-navigator/build",
+  "command": "/usr/bin/clang++  -I/Users/shmoney81/Gainesville-road-navigator/src -I/Users/shmoney81/Gainesville-road-navigator/build/_deps/json-src/include  -Wall -Werror -g -arch arm64 -o CMakeFiles/GainesvilleRoadNavigator.dir/src/distance.cpp.o -c /Users/shmoney81/Gainesville-road-navigator/src/distance.cpp",
+  "file": "/Users/shmoney81/Gainesville-road-navigator/src/distance.cpp",
+  "output": "CMakeFiles/GainesvilleRoadNavigator.dir/src/distance.cpp.o"
+},
+{
+  "directory": "/Users/shmoney81/Gainesville-road-navigator/build",
+  "command": "/usr/bin/clang++  -I/Users/shmoney81/Gainesville-road-navigator/src -I/Users/shmoney81/Gainesville-road-navigator/build/_deps/json-src/include  -Wall -Werror -g -arch arm64 -o CMakeFiles/GainesvilleRoadNavigator.dir/src/minHeap.cpp.o -c /Users/shmoney81/Gainesville-road-navigator/src/minHeap.cpp",
+  "file": "/Users/shmoney81/Gainesville-road-navigator/src/minHeap.cpp",
+  "output": "CMakeFiles/GainesvilleRoadNavigator.dir/src/minHeap.cpp.o"
+},
+{
+  "directory": "/Users/shmoney81/Gainesville-road-navigator/build",
+  "command": "/usr/bin/clang++  -I/Users/shmoney81/Gainesville-road-navigator/src -I/Users/shmoney81/Gainesville-road-navigator/build/_deps/json-src/include  -Wall -Werror -g -arch arm64 -o CMakeFiles/GainesvilleRoadNavigator.dir/src/router.cpp.o -c /Users/shmoney81/Gainesville-road-navigator/src/router.cpp",
+  "file": "/Users/shmoney81/Gainesville-road-navigator/src/router.cpp",
+  "output": "CMakeFiles/GainesvilleRoadNavigator.dir/src/router.cpp.o"
+}
+]

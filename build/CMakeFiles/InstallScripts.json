@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/shmoney81/Gainesville-road-navigator/build/cmake_install.cmake",
+		"/Users/shmoney81/Gainesville-road-navigator/build/_deps/json-build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
