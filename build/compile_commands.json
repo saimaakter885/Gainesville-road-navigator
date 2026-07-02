@@ -40,5 +40,11 @@
   "command": "/usr/bin/clang++  -I/Users/shmoney81/Gainesville-road-navigator/src -I/Users/shmoney81/Gainesville-road-navigator/build/_deps/json-src/include  -Wall -Werror -g -arch arm64 -o CMakeFiles/GainesvilleRoadNavigator.dir/src/minHeap.cpp.o -c /Users/shmoney81/Gainesville-road-navigator/src/minHeap.cpp",
   "file": "/Users/shmoney81/Gainesville-road-navigator/src/minHeap.cpp",
   "output": "CMakeFiles/GainesvilleRoadNavigator.dir/src/minHeap.cpp.o"
+},
+{
+  "directory": "/Users/shmoney81/Gainesville-road-navigator/build",
+  "command": "/usr/bin/clang++  -I/Users/shmoney81/Gainesville-road-navigator/src -I/Users/shmoney81/Gainesville-road-navigator/build/_deps/json-src/include  -Wall -Werror -g -arch arm64 -o CMakeFiles/GainesvilleRoadNavigator.dir/src/router.cpp.o -c /Users/shmoney81/Gainesville-road-navigator/src/router.cpp",
+  "file": "/Users/shmoney81/Gainesville-road-navigator/src/router.cpp",
+  "output": "CMakeFiles/GainesvilleRoadNavigator.dir/src/router.cpp.o"
 }
 ]

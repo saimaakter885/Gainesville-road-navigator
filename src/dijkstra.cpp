@@ -60,7 +60,6 @@ vector<pair<double, double>> Dijkstra::findPath(Node* start, Node* destination) 
     totalDistance = distances[destination];
     executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count();
 
-
     // Create and return coordinate pair vector
     return generateCoordVec(start, destination);
 }

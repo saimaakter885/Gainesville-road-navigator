@@ -13,6 +13,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/GainesvilleRoadNavigator.dir/src/minHeap.cpp.o.d"
   "CMakeFiles/GainesvilleRoadNavigator.dir/src/parser.cpp.o"
   "CMakeFiles/GainesvilleRoadNavigator.dir/src/parser.cpp.o.d"
+  "CMakeFiles/GainesvilleRoadNavigator.dir/src/router.cpp.o"
+  "CMakeFiles/GainesvilleRoadNavigator.dir/src/router.cpp.o.d"
   "GainesvilleRoadNavigator"
   "GainesvilleRoadNavigator.pdb"
 )

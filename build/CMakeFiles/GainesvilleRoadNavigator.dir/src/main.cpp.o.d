@@ -784,6 +784,11 @@ CMakeFiles/GainesvilleRoadNavigator.dir/src/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/stack.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/print \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/unistd.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cassert \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/assert.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_assert.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_static_assert.h \
   /Users/shmoney81/Gainesville-road-navigator/src/graph.h \
+  /Users/shmoney81/Gainesville-road-navigator/src/router.h \
   /Users/shmoney81/Gainesville-road-navigator/src/dijkstra.h \
-  /Users/shmoney81/Gainesville-road-navigator/src/minHeap.h
+  /Users/shmoney81/Gainesville-road-navigator/src/astar.h

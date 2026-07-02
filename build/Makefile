@@ -297,6 +297,30 @@ src/parser.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/GainesvilleRoadNavigator.dir/build.make CMakeFiles/GainesvilleRoadNavigator.dir/src/parser.cpp.s
 .PHONY : src/parser.cpp.s
 
+src/router.o: src/router.cpp.o
+.PHONY : src/router.o
+
+# target to build an object file
+src/router.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GainesvilleRoadNavigator.dir/build.make CMakeFiles/GainesvilleRoadNavigator.dir/src/router.cpp.o
+.PHONY : src/router.cpp.o
+
+src/router.i: src/router.cpp.i
+.PHONY : src/router.i
+
+# target to preprocess a source file
+src/router.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GainesvilleRoadNavigator.dir/build.make CMakeFiles/GainesvilleRoadNavigator.dir/src/router.cpp.i
+.PHONY : src/router.cpp.i
+
+src/router.s: src/router.cpp.s
+.PHONY : src/router.s
+
+# target to generate assembly for a file
+src/router.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GainesvilleRoadNavigator.dir/build.make CMakeFiles/GainesvilleRoadNavigator.dir/src/router.cpp.s
+.PHONY : src/router.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -327,6 +351,9 @@ help:
 	@echo "... src/parser.o"
 	@echo "... src/parser.i"
 	@echo "... src/parser.s"
+	@echo "... src/router.o"
+	@echo "... src/router.i"
+	@echo "... src/router.s"
 .PHONY : help
 
 

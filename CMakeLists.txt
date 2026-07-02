@@ -21,6 +21,7 @@ add_executable(GainesvilleRoadNavigator
         src/astar.cpp
         src/distance.cpp
         src/minHeap.cpp
+        src/router.cpp
 )
 
 target_link_libraries(GainesvilleRoadNavigator PRIVATE nlohmann_json::nlohmann_json)
