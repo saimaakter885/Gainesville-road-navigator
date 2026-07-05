@@ -1,4 +1,5 @@
 #include "router.h"
+#include <algorithm>
 
 void Router::reset() {
     distances.clear();
