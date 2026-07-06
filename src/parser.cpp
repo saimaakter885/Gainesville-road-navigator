@@ -65,6 +65,20 @@ void Parser::parse(const string& filePath, Graph& graph)
 
         string geometryType = geometry["type"];
 
+        if (geometryType == "Point")
+        {
+            if (feature.contains("properties") &&
+                feature["properties"].contains("name"))
+            {
+                string name = feature["properties"]["name"];
+                double lon = geometry["coordinates"][0];
+                double lat = geometry["coordinates"][1];
+
+                graph.addPlace(name, lat, lon);
+            }
+            continue;
+        }
+
         if (geometryType != "LineString")
         {
             continue;
@@ -101,5 +115,5 @@ void Parser::parse(const string& filePath, Graph& graph)
             edgeCount++;
         }
     }
-    cout << "Total Edges: " << edgeCount << endl;
+    cout << "Edges count: " << edgeCount << endl;
 }

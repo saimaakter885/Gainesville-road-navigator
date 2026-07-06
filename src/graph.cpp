@@ -54,4 +54,45 @@ void Graph::printGraphInfo()
     cout << "Total Edges: " << totalEdge / 2 << endl;
 }
 
+void Graph::addPlace(string name, double lat, double lon)
+{
+    Place place;
+    place.name = name;
+    place.lat = lat;
+    place.lon = lon;
+    places.push_back(place);
+}
+
+Node* Graph::findNearestNode(double lat, double lon)
+{
+    Node* nearest = nullptr;
+    double bestDistance = 100000000000.0;
+
+    for (auto it = nodes.begin(); it != nodes.end(); it++)
+    {
+        Node* current = &(it->second);
+        double dLat = current->lat - lat;
+        double dLon = current->lon - lon;
+        double distance = dLat * dLat + dLon * dLon;
+
+        if (distance < bestDistance)
+        {
+            bestDistance = distance;
+            nearest = current;
+        }
+    }
+    return nearest;
+}
+
+void Graph::printSamplePlaces()
+{
+    cout << "Sample places:" << endl;
+    int count = 0;
+    for (size_t i = 0; i < places.size() && count < 20; i++)
+    {
+        cout << "- " << places[i].name << endl;
+        count++;
+    }
+}
+
 
