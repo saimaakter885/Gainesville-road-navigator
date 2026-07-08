@@ -22,6 +22,7 @@ add_executable(GainesvilleRoadNavigator
         src/distance.cpp
         src/minHeap.cpp
         src/router.cpp
+        src/kdTree.cpp
 )
 
 target_link_libraries(GainesvilleRoadNavigator PRIVATE nlohmann_json::nlohmann_json)

@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/GainesvilleRoadNavigator.dir/src/distance.cpp.o.d"
   "CMakeFiles/GainesvilleRoadNavigator.dir/src/graph.cpp.o"
   "CMakeFiles/GainesvilleRoadNavigator.dir/src/graph.cpp.o.d"
+  "CMakeFiles/GainesvilleRoadNavigator.dir/src/kdTree.cpp.o"
+  "CMakeFiles/GainesvilleRoadNavigator.dir/src/kdTree.cpp.o.d"
   "CMakeFiles/GainesvilleRoadNavigator.dir/src/main.cpp.o"
   "CMakeFiles/GainesvilleRoadNavigator.dir/src/main.cpp.o.d"
   "CMakeFiles/GainesvilleRoadNavigator.dir/src/minHeap.cpp.o"

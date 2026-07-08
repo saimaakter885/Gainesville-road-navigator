@@ -225,6 +225,30 @@ src/graph.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/GainesvilleRoadNavigator.dir/build.make CMakeFiles/GainesvilleRoadNavigator.dir/src/graph.cpp.s
 .PHONY : src/graph.cpp.s
 
+src/kdTree.o: src/kdTree.cpp.o
+.PHONY : src/kdTree.o
+
+# target to build an object file
+src/kdTree.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GainesvilleRoadNavigator.dir/build.make CMakeFiles/GainesvilleRoadNavigator.dir/src/kdTree.cpp.o
+.PHONY : src/kdTree.cpp.o
+
+src/kdTree.i: src/kdTree.cpp.i
+.PHONY : src/kdTree.i
+
+# target to preprocess a source file
+src/kdTree.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GainesvilleRoadNavigator.dir/build.make CMakeFiles/GainesvilleRoadNavigator.dir/src/kdTree.cpp.i
+.PHONY : src/kdTree.cpp.i
+
+src/kdTree.s: src/kdTree.cpp.s
+.PHONY : src/kdTree.s
+
+# target to generate assembly for a file
+src/kdTree.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GainesvilleRoadNavigator.dir/build.make CMakeFiles/GainesvilleRoadNavigator.dir/src/kdTree.cpp.s
+.PHONY : src/kdTree.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -342,6 +366,9 @@ help:
 	@echo "... src/graph.o"
 	@echo "... src/graph.i"
 	@echo "... src/graph.s"
+	@echo "... src/kdTree.o"
+	@echo "... src/kdTree.i"
+	@echo "... src/kdTree.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
