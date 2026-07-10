@@ -16,7 +16,7 @@ private:
     long long getCoordinateId(double lat, double lon);
 
 public:
-    void parse(const string& filePath, Graph& graph);
+    bool parse(const string& filePath, Graph& graph);
 };
 
 #endif //GAINESVILLE_ROAD_NAVIGATOR_PARSER_H

@@ -74,7 +74,7 @@ void exportRouteToCSV()
         return;
     }
 
-    ofstream file("route.csv");
+    ofstream file("../route.csv");
     if (!file.is_open())
     {
         cout << "Error: Could not create route.csv" << endl;
@@ -94,6 +94,100 @@ void exportRouteToCSV()
     cout << "File saved as: route.csv" << endl;
 }
 
+void exportRouteToKML() {
+    if (lastPath.empty())
+    {
+        cout << "No route available to export. Please find a route first." << endl;
+        return;
+    }
+
+    ofstream kmlFile("../route.kml");
+    if (!kmlFile.is_open())
+    {
+        cout << "Error: Could not create route.kml" << endl;
+        return;
+    }
+
+    // KML header
+    kmlFile << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+    kmlFile << "<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n";
+    kmlFile << "  <Document>\n";
+    kmlFile << "    <name>Gainesville Routing Engine Path</name>\n";
+
+    // Route styling
+    kmlFile << "    <Style id=\"routeStyle\">\n";
+    kmlFile << "      <LineStyle>\n";
+    kmlFile << "        <color>ff0000ff</color>\n";
+    kmlFile << "        <width>4</width>\n";
+    kmlFile << "      </LineStyle>\n";
+    kmlFile << "    </Style>\n";
+
+    // Start node styling
+    kmlFile << "    <Style id=\"startStyle\">\n";
+    kmlFile << "      <IconStyle>\n";
+    kmlFile << "        <scale>1.2</scale>\n"; 
+    kmlFile << "        <Icon>\n";
+    kmlFile << "          <href>http://maps.google.com/mapfiles/kml/paddle/red-circle.png</href>\n";
+    kmlFile << "        </Icon>\n";
+    kmlFile << "      </IconStyle>\n";
+    kmlFile << "    </Style>\n";
+
+    // End node styling
+    kmlFile << "    <Style id=\"endStyle\">\n";
+    kmlFile << "      <IconStyle>\n";
+    kmlFile << "        <scale>1.2</scale>\n"; 
+    kmlFile << "        <Icon>\n";
+    kmlFile << "          <href>http://maps.google.com/mapfiles/kml/paddle/grn-circle.png</href>\n";
+    kmlFile << "        </Icon>\n";
+    kmlFile << "      </IconStyle>\n";
+    kmlFile << "    </Style>\n";
+
+    // Add start node marker
+    kmlFile << "    <Placemark>\n";
+    kmlFile << "      <name>Start Point</name>\n";
+    kmlFile << "      <styleUrl>#startStyle</styleUrl>\n";
+    kmlFile << "      <description>Origin Node</description>\n";
+    kmlFile << "      <Point>\n";
+    kmlFile << "        <coordinates>" << lastPath.front().second << "," << lastPath.front().first << ",0.0</coordinates>\n";
+    kmlFile << "      </Point>\n";
+    kmlFile << "    </Placemark>\n";
+
+    // Add end node marker
+    kmlFile << "    <Placemark>\n";
+    kmlFile << "      <name>End Point</name>\n";
+    kmlFile << "      <styleUrl>#endStyle</styleUrl>\n";
+    kmlFile << "      <description>Destination Node</description>\n";
+    kmlFile << "      <Point>\n";
+    kmlFile << "        <coordinates>" << lastPath.back().second << "," << lastPath.back().first << ",0.0</coordinates>\n";
+    kmlFile << "      </Point>\n";
+    kmlFile << "    </Placemark>\n";
+
+    // LineString geometry
+    kmlFile << "    <Placemark>\n";
+    kmlFile << "      <name>Shortest Path</name>\n";
+    kmlFile << "      <styleUrl>#routeStyle</styleUrl>\n";
+    kmlFile << "      <LineString>\n";
+    kmlFile << "        <tessellate>1</tessellate>\n";
+    kmlFile << "        <coordinates>\n";
+
+    // Add coordinates (Longitude, Latitude, Altitude)
+    for (const auto& coord : lastPath) {
+        kmlFile << "          " << coord.second << "," << coord.first << ",0.0\n";
+    }
+
+    // Close structure
+    kmlFile << "        </coordinates>\n";
+    kmlFile << "      </LineString>\n";
+    kmlFile << "    </Placemark>\n";
+    kmlFile << "  </Document>\n";
+    kmlFile << "</kml>\n";
+
+    kmlFile.close();
+    cout << endl;
+    cout << "Route exported successfully!" << endl;
+    cout << "File saved as: route.kml" << endl;
+}
+
 void printMenu() {
     cout << endl;
     cout << "======================================" << endl;
@@ -104,7 +198,8 @@ void printMenu() {
     cout << "3. Show graph stats" << endl;
     cout << "4. Show sample places" << endl;
     cout << "5. Export last route to CSV" << endl;
-    cout << "6. Exit" << endl;
+    cout << "6. Export last route to KML" << endl;
+    cout << "7. Exit" << endl;
     cout << "======================================" << endl;
     cout << "Enter choice: ";
 }
@@ -264,7 +359,10 @@ int main()
 
     cout << "Loading Gainesville road network..." << endl;
 
-    parser.parse("../data/gainesville.geojson", graph);
+    
+    if (!parser.parse("../data/gainesville.geojson", graph)) {
+        return -1;
+    }
 
     KDTree kdTree;
     kdTree.build(graph.nodes);
@@ -310,6 +408,10 @@ int main()
         }
         else if (choice == 6)
         {
+            exportRouteToKML();
+        }
+        else if (choice == 7)
+        {
             cout << "Exiting Gainesville Road Navigator." << endl;
             break;
         }
@@ -318,4 +420,6 @@ int main()
             cout << "Invalid choice. Try again." << endl;
         }
     }
+
+    return 0;
 }
