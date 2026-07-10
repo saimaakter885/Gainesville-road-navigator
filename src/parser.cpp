@@ -29,13 +29,13 @@ long long Parser::getCoordinateId(double lat, double lon)
     return coordinateMap[key];
 }
 
-void Parser::parse(const string& filePath, Graph& graph)
+bool Parser::parse(const string& filePath, Graph& graph)
 {
     ifstream file(filePath);
     if (!file.is_open())
     {
         cout << "Error: Cannot open file " << filePath << endl;
-        return;
+        return false;
     }
 
     json data;
@@ -43,7 +43,7 @@ void Parser::parse(const string& filePath, Graph& graph)
     if (!data.contains("features"))
     {
         cout << "Error: No features found in GeoJSON file" << endl;
-        return;
+        return false;
     }
 
     int edgeCount = 0;
@@ -115,5 +115,6 @@ void Parser::parse(const string& filePath, Graph& graph)
             edgeCount++;
         }
     }
-    cout << "Edges count: " << edgeCount << endl;
+    cout << "Edge count: " << edgeCount << endl;
+    return true;
 }
