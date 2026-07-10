@@ -1,6 +1,7 @@
 #include "kdTree.h"
 #include "distance.h"
 #include <algorithm>
+#include <limits>
 #include <cmath>
 
 KDNode* KDTree::buildTreeRecursive(std::vector<Node*>& nodes, int depth, int start, int end) {
