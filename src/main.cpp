@@ -40,6 +40,25 @@ Place* findPlaceByName(Graph& graph, string searchName)
     return nullptr;
 }
 
+bool tryParseCoordinates(const string& input, double& lat, double& lon) {
+    if (input.find(',') != string::npos || (!input.empty() && (std::isdigit(input[0]) || input[0] == '-'))) {
+        try {
+            std::stringstream ss(input);
+            string latStr, lonStr;
+            
+            if (std::getline(ss, latStr, ',')) {
+                std::getline(ss, lonStr);
+                lat = std::stod(latStr);
+                lon = std::stod(lonStr);
+                return true;
+            }
+        } catch (...) {
+            return false;
+        }
+    }
+    return false;
+}
+
 vector<Node*> findPossibleStartEndNodes(Graph& graph, double lat, double lon, int limit = 30)
 {
     vector<pair<double, Node*>> possibleNodes;
@@ -206,40 +225,54 @@ void printMenu() {
 
 void runRoute(Graph& graph, KDTree& kdTree, bool compareMode)
 {
-    string startName;
-    string endName;
+    string startInput, endInput;
+    Place* startPlace;
+    Place* endPlace;
+    double startLat = 0.0, startLon = 0.0;
+    double endLat = 0.0, endLon = 0.0;
 
     cout << endl;
-    cout << "Start place: ";
-    getline(cin, startName);
+    cout << "Start place name OR coordinates (lat, lon): ";
+    getline(cin, startInput);
 
-    cout << "End place: ";
-    getline(cin, endName);
+    cout << "End place name OR coordinates (lat, lon): ";
+    getline(cin, endInput);
 
-    Place* startPlace = findPlaceByName(graph, startName);
-    Place* endPlace = findPlaceByName(graph, endName);
+    bool coordinates = tryParseCoordinates(startInput, startLat, startLon);
 
-    if (startPlace == nullptr)
-    {
-        cout << "Start place not found." << endl;
-        return;
+    // Process start input
+    if (coordinates) {
+        cout << "Parsed start coordinates: " << startLat << ", " << startLon << endl;
+    } else {
+        startPlace = findPlaceByName(graph, startInput);
+        if (startPlace == nullptr) {
+            cout << "Start place not found." << endl;
+            return;
+        }
+        cout << "Matched start place: " << startPlace->name << endl;
+        startLat = startPlace->lat;
+        startLon = startPlace->lon;
     }
 
-    if (endPlace == nullptr)
-    {
-        cout << "End place not found." << endl;
-        return;
+    // Process end input
+    if (tryParseCoordinates(endInput, endLat, endLon)) {
+        cout << "Parsed end coordinates: " << endLat << ", " << endLon << endl;
+    } else {
+        endPlace = findPlaceByName(graph, endInput);
+        if (endPlace == nullptr) {
+            cout << "End place not found." << endl;
+            return;
+        }
+        cout << "Matched end place: " << endPlace->name << endl;
+        endLat = endPlace->lat;
+        endLon = endPlace->lon;
     }
 
-    cout << endl;
-    cout << "Matched start: " << startPlace->name << endl;
-    cout << "Matched end: " << endPlace->name << endl;
+    Node* kdStart = kdTree.findNearestNode(startLat, startLon);
+    Node* kdEnd = kdTree.findNearestNode(endLat, endLon);
 
-    Node* kdStart = kdTree.findNearestNode(startPlace->lat, startPlace->lon);
-    Node* kdEnd = kdTree.findNearestNode(endPlace->lat, endPlace->lon);
-
-    vector<Node*> startNodes = findPossibleStartEndNodes(graph, startPlace->lat, startPlace->lon);
-    vector<Node*> endNodes = findPossibleStartEndNodes(graph, endPlace->lat, endPlace->lon);
+    vector<Node*> startNodes = findPossibleStartEndNodes(graph, startLat, startLon);
+    vector<Node*> endNodes = findPossibleStartEndNodes(graph, endLat, endLon);
 
     if (kdStart != nullptr)
     {
@@ -293,7 +326,12 @@ void runRoute(Graph& graph, KDTree& kdTree, bool compareMode)
     cout << endl;
     cout << "           Route Comparison            " << endl;
     cout << "----------------------------------------" << endl;
-    cout << startPlace->name << " ---> " << endPlace->name << endl;
+    if (coordinates) {
+        cout << "(" << startLat << ", " << startLon << ")" << " ---> "
+            << "(" << endLat << ", " << endLon << ")" << endl;
+    } else {
+        cout << startPlace->name << " ---> " << endPlace->name << endl;
+    }
     cout << fixed << setprecision(2);
     cout << "Distance: " << bestAstar.getTotalDistance() / 1000.0 << " km" << endl;
     cout << "----------------------------------------" << endl;
