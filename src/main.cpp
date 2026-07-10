@@ -233,7 +233,14 @@ void runRoute(Graph& graph, KDTree& kdTree, bool compareMode)
 
         if (bestAstar.getNodesVisited() < bestDijkstra.getNodesVisited())
         {
-            cout << "A* explored fewer nodes and finished faster." << endl;
+            double dijkstraNodes = static_cast<double>(bestDijkstra.getNodesVisited());
+            double astarNodes = static_cast<double>(bestAstar.getNodesVisited());
+            double percentage = dijkstraNodes > 0.0 ? ((dijkstraNodes - astarNodes) / dijkstraNodes) * 100.0 : 0.0;
+            int timeDifference = bestDijkstra.getExecutionTime() - bestAstar.getExecutionTime();
+
+            cout << fixed << setprecision(1)
+                 << "A* explored " << percentage << "% fewer nodes and finished "
+                 << timeDifference << " us faster." << endl;
         }
         else
         {
