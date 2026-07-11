@@ -111,6 +111,7 @@ The program compares:
 - Running time
 - Path distance
 - Path size
+
 ![Comparison](images/comparison2.png)
 
 ### Sample Places
