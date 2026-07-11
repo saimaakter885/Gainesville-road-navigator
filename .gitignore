@@ -1,5 +1,18 @@
+# CLion files
 .idea/
 cmake-build-debug/
+
+# Build folders
 build/
+cmake-build-*/
+
+# Generated output files
 *.csv
 *.kml
+*.exe
+*.o
+*.obj
+*.out
+
+# macOS files
+.DS_Store

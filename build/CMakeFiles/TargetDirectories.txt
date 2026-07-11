@@ -1,5 +1,0 @@
-/Users/shmoney81/Gainesville-road-navigator/build/CMakeFiles/GainesvilleRoadNavigator.dir
-/Users/shmoney81/Gainesville-road-navigator/build/CMakeFiles/edit_cache.dir
-/Users/shmoney81/Gainesville-road-navigator/build/CMakeFiles/rebuild_cache.dir
-/Users/shmoney81/Gainesville-road-navigator/build/_deps/json-build/CMakeFiles/edit_cache.dir
-/Users/shmoney81/Gainesville-road-navigator/build/_deps/json-build/CMakeFiles/rebuild_cache.dir
