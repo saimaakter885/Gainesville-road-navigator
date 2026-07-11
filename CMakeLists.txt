@@ -15,6 +15,7 @@ include_directories(src)
 
 add_executable(GainesvilleRoadNavigator
         src/main.cpp
+        src/interface.cpp
         src/parser.cpp
         src/graph.cpp
         src/dijkstra.cpp

@@ -12,6 +12,11 @@
 #include "dijkstra.h"
 #include "astar.h"
 #include "kdTree.h"
+#include "interface.h"
+
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 using namespace std;
 
@@ -89,14 +94,14 @@ void exportRouteToCSV()
 {
     if (lastPath.empty())
     {
-        cout << "No route available to export. Please find a route first." << endl;
+        displayNoLastRoute();
         return;
     }
 
     ofstream file("../route.csv");
     if (!file.is_open())
     {
-        cout << "Error: Could not create route.csv" << endl;
+        displayError("Could not create route.csv");
         return;
     }
 
@@ -104,26 +109,38 @@ void exportRouteToCSV()
 
     for (size_t i = 0; i < lastPath.size(); i++)
     {
-        file << "Point " << i + 1 << "," << fixed << setprecision(7) << lastPath[i].first << "," << lastPath[i].second << endl;
+        string label;
+        if (i == 0)
+        {
+            label = "Start";
+        }
+        else if (i == lastPath.size() - 1)
+        {
+            label = "End";
+        }
+        else
+        {
+            label = "Waypoint " + to_string(i);
+        }
+        file << label << "," << fixed << setprecision(7)
+             << lastPath[i].first << "," << lastPath[i].second << "\n";
     }
 
     file.close();
-    cout << endl;
-    cout << "Route exported successfully!" << endl;
-    cout << "File saved as: route.csv" << endl;
+    displayExportSuccess("route.csv", lastPath.size());
 }
 
 void exportRouteToKML() {
     if (lastPath.empty())
     {
-        cout << "No route available to export. Please find a route first." << endl;
+        displayNoLastRoute();
         return;
     }
 
     ofstream kmlFile("../route.kml");
     if (!kmlFile.is_open())
     {
-        cout << "Error: Could not create route.kml" << endl;
+        displayError("Could not create route.kml");
         return;
     }
 
@@ -202,25 +219,7 @@ void exportRouteToKML() {
     kmlFile << "</kml>\n";
 
     kmlFile.close();
-    cout << endl;
-    cout << "Route exported successfully!" << endl;
-    cout << "File saved as: route.kml" << endl;
-}
-
-void printMenu() {
-    cout << endl;
-    cout << "======================================" << endl;
-    cout << "        Gainesville Road Navigator     " << endl;
-    cout << "======================================" << endl;
-    cout << "1. Find shortest path" << endl;
-    cout << "2. Run Comparison (Dijkstra vs A*)" << endl;
-    cout << "3. Show graph stats" << endl;
-    cout << "4. Show sample places" << endl;
-    cout << "5. Export last route to CSV" << endl;
-    cout << "6. Export last route to KML" << endl;
-    cout << "7. Exit" << endl;
-    cout << "======================================" << endl;
-    cout << "Enter choice: ";
+    displayExportSuccess("route.kml", lastPath.size());
 }
 
 void runRoute(Graph& graph, KDTree& kdTree, bool compareMode)
@@ -242,28 +241,29 @@ void runRoute(Graph& graph, KDTree& kdTree, bool compareMode)
 
     // Process start input
     if (coordinates) {
-        cout << "Parsed start coordinates: " << startLat << ", " << startLon << endl;
+        displayInfo("Parsed start coordinates: " + to_string(startLat) + ", " + to_string(startLon));
     } else {
         startPlace = findPlaceByName(graph, startInput);
         if (startPlace == nullptr) {
-            cout << "Start place not found." << endl;
+            displayError("Start place not found.");
             return;
         }
-        cout << "Matched start place: " << startPlace->name << endl;
+        displayInfo("Matched start place: " + startPlace->name);
         startLat = startPlace->lat;
         startLon = startPlace->lon;
     }
 
     // Process end input
-    if (tryParseCoordinates(endInput, endLat, endLon)) {
-        cout << "Parsed end coordinates: " << endLat << ", " << endLon << endl;
+    bool endCoordinates = tryParseCoordinates(endInput, endLat, endLon);
+    if (endCoordinates) {
+        displayInfo("Parsed end coordinates: " + to_string(endLat) + ", " + to_string(endLon));
     } else {
         endPlace = findPlaceByName(graph, endInput);
         if (endPlace == nullptr) {
-            cout << "End place not found." << endl;
+            displayError("End place not found.");
             return;
         }
-        cout << "Matched end place: " << endPlace->name << endl;
+        displayInfo("Matched end place: " + endPlace->name);
         endLat = endPlace->lat;
         endLon = endPlace->lon;
     }
@@ -317,87 +317,42 @@ void runRoute(Graph& graph, KDTree& kdTree, bool compareMode)
     }
     if (!found)
     {
-        cout << "No route found between these places." << endl;
+        displayNoRoute();
         return;
     }
 
     lastPath = bestAstarPath;
 
-    cout << endl;
-    cout << "           Route Comparison            " << endl;
-    cout << "----------------------------------------" << endl;
-    if (coordinates) {
-        cout << "(" << startLat << ", " << startLon << ")" << " ---> "
-            << "(" << endLat << ", " << endLon << ")" << endl;
-    } else {
-        cout << startPlace->name << " ---> " << endPlace->name << endl;
-    }
-    cout << fixed << setprecision(2);
-    cout << "Distance: " << bestAstar.getTotalDistance() / 1000.0 << " km" << endl;
-    cout << "----------------------------------------" << endl;
+    string startName = coordinates ? ("(" + to_string(startLat) + ", " + to_string(startLon) + ")") : startPlace->name;
+    string endName = endCoordinates ? ("(" + to_string(endLat) + ", " + to_string(endLon) + ")") : endPlace->name;
+
+    displayRouteHeader(startName, endName, bestAstar.getTotalDistance());
 
     if (compareMode)
     {
-        cout << left;
-        cout << setw(20) << "" << setw(20) << "Dijkstra"
-                 << setw(20) << "A*" << endl;
-
-        cout << setw(20) << "Nodes:" << setw(20) << bestDijkstra.getNodesVisited()
-                << setw(20) << bestAstar.getNodesVisited()
-                << endl;
-
-        cout << setw(20) << "Time:" << setw(20) << (to_string(bestDijkstra.getExecutionTime()) + " us")
-                    << setw(20) << (to_string(bestAstar.getExecutionTime()) + " us")
-                    << endl;
-
-        ostringstream dijkstraDistance, astarDistance;
-        dijkstraDistance << fixed << setprecision(2) << bestDijkstra.getTotalDistance() / 1000.0 << " km";
-        astarDistance << fixed << setprecision(2) << bestAstar.getTotalDistance() / 1000.0 << " km";
-
-        cout << setw(20) << "Distance:" << setw(20) << dijkstraDistance.str()
-                          << setw(20) << astarDistance.str()
-                          << endl;
-
-        cout << setw(20) << "Path size:" << setw(20) << bestDijkstraPath.size()
-                          << setw(20) << bestAstarPath.size()
-                          << endl;
-        cout << right;
-        cout << "--------------------------------------" << endl;
-
-        if (bestAstar.getNodesVisited() < bestDijkstra.getNodesVisited())
-        {
-            double dijkstraNodes = static_cast<double>(bestDijkstra.getNodesVisited());
-            double astarNodes = static_cast<double>(bestAstar.getNodesVisited());
-            double percentage = dijkstraNodes > 0.0 ? ((dijkstraNodes - astarNodes) / dijkstraNodes) * 100.0 : 0.0;
-            int timeDifference = bestDijkstra.getExecutionTime() - bestAstar.getExecutionTime();
-
-            cout << fixed << setprecision(1)
-                 << "A* explored " << percentage << "% fewer nodes and finished "
-                 << timeDifference << " us faster." << endl;
-        }
-        else
-        {
-            cout << "Both algorithms found the route. A* did not explore fewer nodes for this case." << endl;
-        }
+        displayComparisonTable(bestDijkstra, bestAstar, bestDijkstraPath.size(), bestAstarPath.size());
     }
     else
     {
-        cout << "Shortest path found using A*." << endl;
-        cout << "Nodes visited: " << bestAstar.getNodesVisited() << endl;
-        cout << "Time taken: " << bestAstar.getExecutionTime() << " us" << endl;
-        cout << "Path distance: " << bestAstar.getTotalDistance() / 1000.0 << " km" << endl;
-        cout << "Path size: " << bestAstarPath.size() << endl;
+        displaySingleResult(bestAstar, bestAstarPath.size());
     }
 }
 
 int main()
 {
+#ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    DWORD consoleMode = 0;
+    GetConsoleMode(consoleHandle, &consoleMode);
+    SetConsoleMode(consoleHandle, consoleMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
+#endif
+
     Graph graph;
     Parser parser;
 
-    cout << "Loading Gainesville road network..." << endl;
+    displayLoadingGraph();
 
-    
     if (!parser.parse("../data/gainesville.geojson", graph)) {
         return -1;
     }
@@ -405,24 +360,11 @@ int main()
     KDTree kdTree;
     kdTree.build(graph.nodes);
 
-    cout << "Data loaded successfully." << endl;
-
-    int choice;
+    displayLoadSuccess(graph);
 
     while (true)
     {
-        printMenu();
-
-        if (!(cin >> choice))
-        {
-            cin.clear();
-            cin.ignore(10000, '\n');
-
-            cout << "Invalid choice. Please enter a number from 1-6." << endl;
-            continue;
-        }
-
-        cin.ignore(10000, '\n');
+        int choice = displayMenu();
 
         if (choice == 1)
         {
@@ -434,11 +376,11 @@ int main()
         }
         else if (choice == 3)
         {
-            graph.printGraphInfo();
+            displayGraphStats(graph);
         }
         else if (choice == 4)
         {
-            graph.printSamplePlaces();
+            displaySamplePlaces(graph);
         }
         else if (choice == 5)
         {
@@ -452,10 +394,6 @@ int main()
         {
             cout << "Exiting Gainesville Road Navigator." << endl;
             break;
-        }
-        else
-        {
-            cout << "Invalid choice. Try again." << endl;
         }
     }
 
