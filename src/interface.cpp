@@ -144,7 +144,7 @@ void displaySamplePlaces(const Graph& graph) {
 
     vector<string> lines;
     int count = 0;
-    for (size_t i = 0; i < graph.places.size() && count < 20; i++) {
+    for (size_t i = 0; i < graph.places.size() && count <= 20; i++) {
         lines.push_back("  · " + graph.places[i].name);
         count++;
     }
