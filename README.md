@@ -31,27 +31,49 @@ cd Gainesville-road-navigator
 ```
 
 # Building the Project
+
+## Windows / Linux / macOS
+
+Configure the project:
+
 ```bash
-cmake -B build
+cmake -S . -B build
+```
+Build the executable:
+
+```bash
 cmake --build build
 ```
-Run the executable inside the build directory.
+# Running the Program
 
-Linux/macOS:
+The executable must be run from inside the build directory.
+
+### Windows
+
+```powershell
+cd build
+.\GainesvilleRoadNavigator.exe
+```
+
+### Linux/macOS
+
 ```bash
+cd build
 ./GainesvilleRoadNavigator
 ```
-Windows:
-```bash
-GainesvilleRoadNavigator.exe
-```
 # Important Note
-The executable must be run from the build directory.
-For our setup, this is usually:
+
+The program uses relative paths to load:
+
 ```text
-cmake-build-debug/
+../data/gainesville.geojson
 ```
-Do **NOT** run the executable from the project root directory, because the GeoJSON file may not be found.
+Therefore, the executable must be run from the build directory.
+Running the executable from the project root will cause:
+
+```text
+Error: Cannot open file ../data/gainesville.geojson
+```
 
 # Program Menu
 1. Find the shortest path
