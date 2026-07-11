@@ -87,7 +87,7 @@ Error: Cannot open file ../data/gainesville.geojson
 ## Example Outputs
 
 ### Main Menu
-![menu](images/menu.png)
+![menu](images/menu2.png)
 
 ### Shortest Path Search
 Users can search using place names:
@@ -101,8 +101,8 @@ or GPS coordinates:
 Start: 29.6499, -82.3483
 End: 29.6485, -82.3443
 ```
-![shortest path](images/shortest_path_using_names.png)
-![shortest path](images/shortest_path_using_coordinates.png)
+![shortest path](images/shortest_path_using_names2.png)
+![shortest path](images/shortest_path_using_coordinates2.png)
 
 ### Dijkstra vs A* Comparison
 The program compares:
@@ -111,15 +111,15 @@ The program compares:
 - Running time
 - Path distance
 - Path size
-![Comparison](images/comparison.png)
+![Comparison](images/comparison2.png)
 
 ### Sample Places
 
-![Places](images/sample_places.png)
+![Places](images/sample_places2.png)
 
 ### Graph Statistics
 
-![Statistics](images/graph_stats.png)
+![Statistics](images/graph_stats2.png)
 
 ### Route Visualization
 
@@ -138,3 +138,4 @@ To view the route:
 # Contributors
 - Saima Akter (saimaakter885)
 - Stephen Horvat (Shmoney81)
+- Thomas Beegle (thomaspbeegle-v)
